@@ -1,6 +1,6 @@
 #pragma once
 
-#include <view_model/view_model_factory.hpp>
+#include <view_model/factory/view_model_factory.hpp>
 #include <QGuiApplication>
 #include <qqml.h>
 

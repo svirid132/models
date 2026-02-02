@@ -16,7 +16,11 @@ public:
             {"qwerty", "asd"},
             {"zxcv", "ghj"}
         };
-        animal_model_ = AnimalModelFactory::createModel(std::move(init_animals), this);
+        animal_model_set_ = AnimalModelFactory::createModel(std::move(init_animals), this);
+        animal_model_set_.bind_data_changed([](Animal animal) -> bool
+        {
+            return true;
+        });
     };
 
     static void registerTypes()
@@ -24,11 +28,21 @@ public:
         qmlRegisterUncreatableType<AnimalViewModel>("ViewModel", 1, 0, "AnimalViewModel", "only value type");
     };
 
+    Q_INVOKABLE void appendAnimal()
+    {
+        animal_model_set_.append({"psevdo_fox", "psevdo_fox"});
+    }
+
+    Q_INVOKABLE void removeLastAnimal()
+    {
+        animal_model_set_.remove_last_animal();
+    }
+
     QAbstractListModel* animalModel()
     {
-        return animal_model_;
+        return animal_model_set_.animal_model.get();
     }
 
 private:
-    ComposedModel* animal_model_;
+    AnimalModelSet animal_model_set_;
 };

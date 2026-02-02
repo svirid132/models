@@ -9,26 +9,46 @@ Item {
     property AnimalViewModel animalViewModel: {
         return ViewModelFactory.createAnimalModelView()
     }
-    ListView {
-        clip: true
+    ColumnLayout {
         anchors.fill: parent
-        model: animalViewModel.animalModel
-        delegate: Rectangle {
-            implicitWidth: 100
-            implicitHeight: 50
-            RowLayout {
-                Button {
-                    text: qsTr("changed")
-                    onClicked: {
-                        type = "fox";
-                        size = "12345";
+        ListView {
+            clip: true
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            model: animalViewModel.animalModel
+            delegate: Rectangle {
+                implicitWidth: 100
+                implicitHeight: 50
+                RowLayout {
+                    Label {
+                        text: type
+                    }
+                    Label {
+                        text: size
+                    }
+                    Button {
+                        text: "change"
+                        onClicked: {
+                            type = "qwerty";
+                            size = "bigbig";
+                        }
                     }
                 }
-                Label {
-                    text: type
+            }
+        }
+        RowLayout
+        {
+            Layout.fillWidth: true
+            Button {
+                text: qsTr("append animal")
+                onClicked: {
+                    animalViewModel.appendAnimal();
                 }
-                Label {
-                    text: size
+            }
+            Button {
+                text: qsTr("remove animal")
+                onClicked: {
+                    animalViewModel.removeLastAnimal();
                 }
             }
         }

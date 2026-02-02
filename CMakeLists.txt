@@ -18,13 +18,14 @@ qt_add_qml_module(appmodels
     VERSION 1.0
     QML_FILES
         Main.qml
-        SOURCES model/template_vector_items.hpp
+        SOURCES model/interface_items/template_vector_items.hpp
         SOURCES model/composed_model.hpp
+        SOURCES model/template_items/template_vector_items.hpp
         SOURCES domain/animal.hpp
         SOURCES model_factory/animal_model_factory.hpp
         SOURCES view_model/animal_view_model.hpp
         SOURCES models_application.hpp
-        SOURCES view_model/view_model_factory.hpp
+        SOURCES view_model/factory/view_model_factory.hpp
         SOURCES application/read_file.hpp
         SOURCES data/file_controller.hpp
         RESOURCES

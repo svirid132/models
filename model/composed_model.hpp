@@ -1,6 +1,6 @@
 #pragma once
 
-#include "template_vector_items.hpp"
+#include "interface_items/template_vector_items.hpp"
 
 #include <QAbstractListModel>
 
@@ -52,6 +52,27 @@ public:
         beginResetModel();
         template_items_ = std::move(template_items);
         endResetModel();
+    }
+
+    // модификаторы изменений
+    void beginInsertRows(int first, int last)
+    {
+        QAbstractListModel::beginInsertRows(QModelIndex(), first, last);
+    }
+
+    void endInsertRows()
+    {
+        QAbstractListModel::endInsertRows();
+    }
+
+    void beginRemoveRows(int first, int last)
+    {
+        QAbstractListModel::beginRemoveRows(QModelIndex(), first, last);
+    }
+
+    void endRemoveRows()
+    {
+        QAbstractListModel::endRemoveRows();
     }
 
 private:
